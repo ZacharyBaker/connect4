@@ -44,31 +44,22 @@ class Game {
 		}
 	}
 
-	takeTurn () {
-		const rl = readline.createInterface({
-	    input: process.stdin,
-	    output: process.stdout,
-	  });
-
+	async takeTurn () {
+		// passing the board for the bots
+		const column = await this.activePlayer.takeTurn(this.board);
 	  console.log('\n');
-		return new Promise((resolve, reject) => {
-			rl.question(`${this.activePlayer.name}, what's your move?`, (column) => {
-				// validate input
-				let validMove = false;
-				let row;
-				if (/[1-7]/.test(column) && !this.fullColumns[column]) {
-					row = this.dropPiece(this.activePlayer.char, column);
-					validMove = [row, column - 1];
-				  rl.close();
-				  return resolve(validMove);
-				}
+		// validate input
+		let validMove = false;
+		let row;
+		if (/[1-7]/.test(column) && !this.fullColumns[column]) {
+			row = this.dropPiece(this.activePlayer.char, column);
+			validMove = [row, column - 1];
+		  return validMove;
+		}
 
-				console.log('\n');
-				console.log(`Invalid move ${this.activePlayer.name}, try again`);
-			  rl.close();
-			  return resolve(validMove);
-			})
-		})
+		console.log('\n');
+		console.log(`Invalid move ${this.activePlayer.name}, try again`);
+	  return validMove;
 
 	}
 
