@@ -60,7 +60,6 @@ class Game {
 		console.log('\n');
 		console.log(`Invalid move ${this.activePlayer.name}, try again`);
 	  return validMove;
-
 	}
 
 	dropPiece (char, column) {
@@ -198,11 +197,25 @@ class Game {
 				if (this.winCheck(validMove)) {
 					winner = true;
 					console.log(`${this.activePlayer.name} wins!!!`);
-					return;
+
+					let newGame = await this.activePlayer.startNewGame();
+
+					if (newGame) {
+						this.newGame();
+					} else {
+						return;
+					}
 				}
 				this.activePlayer = this.activePlayer === this.p1 ? this.p2 : this.p1;
 			}
 		}
+	}
+
+	newGame() {
+		this.board = this.buildBoard();
+		this.fullColumns = {};
+		this.activePlayer = this.p1;
+		this.play();
 	}
 }
 

@@ -9,3 +9,5 @@ const getNumberOfPlayers = require('./helpers/getNumberOfPlayers');
 	g1.play();
 }())
 
+// TODO:
+// Make bot smarter
