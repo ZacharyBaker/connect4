@@ -10,4 +10,10 @@ const getNumberOfPlayers = require('./helpers/getNumberOfPlayers');
 }())
 
 // TODO:
-// Make bot smarter
+// Make 'smartBot'
+
+// give player the choice of
+// which bot to play against
+
+// fix bug of having the
+// same char/symbol

@@ -8,6 +8,7 @@ class Game {
 		this.p2Piece = '%';
 		this.board = this.buildBoard();
 		this.fullColumns = {};
+		this.lastMove = null;
 		this.activePlayer = this.p1;
 	}
 
@@ -46,7 +47,11 @@ class Game {
 
 	async takeTurn () {
 		// passing the board for the bots
-		const column = await this.activePlayer.takeTurn(this.board);
+		const column = await this.activePlayer.takeTurn(
+			this.board,
+			this.fullColumns,
+			this.lastMove
+		);
 	  console.log('\n');
 		// validate input
 		let validMove = false;
@@ -54,6 +59,7 @@ class Game {
 		if (/[1-7]/.test(column) && !this.fullColumns[column]) {
 			row = this.dropPiece(this.activePlayer.char, column);
 			validMove = [row, column - 1];
+			this.lastMove = validMove;
 		  return validMove;
 		}
 
@@ -215,6 +221,7 @@ class Game {
 		this.board = this.buildBoard();
 		this.fullColumns = {};
 		this.activePlayer = this.p1;
+		this.lastMove = null;
 		this.play();
 	}
 }

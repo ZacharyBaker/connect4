@@ -1,10 +1,8 @@
 const Bot = require('./Bot');
 
-class SmartBot extends Bot {
-	constructor (props) {
-		super(props);
-
-		this.name = 'SmartBot';
+class DumbBot extends Bot {
+	constructor (...args) {
+		super(...args);
 	}
 
 	async takeTurn (board, fullColumns) {
@@ -27,4 +25,4 @@ class SmartBot extends Bot {
 	}
 }
 
-module.exports = SmartBot;
+module.exports = DumbBot;

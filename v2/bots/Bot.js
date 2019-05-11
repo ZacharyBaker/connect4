@@ -7,7 +7,7 @@ class Bot {
 	async takeTurn (board, fullColumns) {}
 
 	async startNewGame () {
-		console.log(`Want to play again?`);
+		console.log(`Want to play again?(y/n)`);
 		await this.sleep(2000);
 		return false;
 	}
